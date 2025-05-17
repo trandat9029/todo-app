@@ -1,32 +1,32 @@
+import Footer from "./components/elements/Footer"
+import Header from "./components/elements/Header"
+import BGHeading from "./components/elements/BGHeading"
+import TodoList from "./components/sections/TodoList"
+import Sidebar from "./components/sections/Sidebar"
 
 
 function App() {
 
   return (
     <>
-      <div className="flex justify-center items-center font-sans bg-body min-h-screen ">
-        <h1 className="text-title text-black/5 uppercase absolute left-1/2 -translate-x-1/2 tracking-[0.2em]"
-        >
-          TodoApp
-        </h1>
+      <div className="flex flex-col justify-center items-center font-sans bg-body min-h-screen ">
+        <BGHeading/>
 
         {/* main */}
         <main className="relative w-[972px] h-[636px] bg-white rounded-lg 
-                        shadow-[0_4px_4px_rgba(0,0,0,0.08)] grid grid-cols-[7fr_4fr] grid-rows-[59px_1fr]"
+                        shadow-[0_4px_4px_rgba(0,0,0,0.08)] grid grid-cols-[7fr_4fr] 
+                        grid-rows-[59px_1fr] overflow-hidden"
         >
-          <header className="col-[1/3] row-[1/2] bg-header"></header>
+          <Header/>
+          
+          <TodoList />
 
-          <ul></ul>
-
-          <section className="col-[2/3] row-[2/3] bg-main"></section>
-
+          <Sidebar />
         </main>
 
 
         {/* footer */}
-        <footer>
-
-        </footer>
+        <Footer/>
 
       </div>
     </>
