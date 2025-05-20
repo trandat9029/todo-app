@@ -1,14 +1,28 @@
-import React from 'react'
-import Input from '../shared/Input'
+import { useState } from 'react'
 import Button from '../shared/Button'
 
-export default function AddTodoForm() {
+type AddTodoFormProps = {
+  handleAddTodo: (todoText: string) => void;
+}
+
+export default function AddTodoForm({handleAddTodo} : AddTodoFormProps) {
+
+  const [todoText, setTodoText] = useState('')
+
   return (
     <>
-        <form >
+        <form onSubmit={(e) => {
+          e.preventDefault();
+          handleAddTodo(todoText);
+          setTodoText("");
+        }} >
             <h2 className='font-medium text-[#231d15]'>Add a todo</h2>
-            <Input title='Enter a todo' className='h-[45px] border border-black/[12%] rounded-[5px] my-2 text-sm block w-full px-4'/>
-            <Button buttonType=''>Add to list</Button>
+            <input 
+              type='text' 
+              value={todoText}
+              onChange={(e) => {setTodoText(e.target.value)}}  
+              className='h-[45px] border border-black/[12%] rounded-[5px] my-2 text-sm block w-full px-4'/>
+            <Button >Add to list</Button>
         </form>
     </>
   )

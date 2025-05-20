@@ -1,7 +1,7 @@
 import React from 'react'
 
-interface ButtonProps{
-    buttonType: string,
+type ButtonProps = {
+    buttonType?: "primary" | "secondary",
     children: React.ReactNode,
 }
 

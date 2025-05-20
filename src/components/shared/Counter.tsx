@@ -1,22 +1,17 @@
 import React from 'react'
 
-type Todo = {
-  id: number;
-  text: string;
-  isCompleted: boolean;
-};
-
-interface TodoProps {
-  todos: Todo[];
+type CounterProps = {
+  totalNumberOfTodos: number,
+  numberOfCompletedTodos: number,
 }
 
-export default function Counter({todos} : TodoProps) {
+export default function Counter({totalNumberOfTodos, numberOfCompletedTodos} : CounterProps) {
   return (
     <>
         <p>
             <b>
-              {todos.filter((todo) => todo.isCompleted).length}
-            </b> / {todos.length} todos completed
+              {numberOfCompletedTodos}
+            </b> / {totalNumberOfTodos} todos completed
         </p>
     </>
   )
