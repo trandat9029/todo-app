@@ -1,14 +1,16 @@
 
-import { Todo } from '../../App'
+// import { useContext } from 'react'
 import DeleteButton from '../shared/DeleteButton'
+// import { TodosContext } from '../../contexts/TodosContextProvider'
+import { useTodosContext } from '../../lib/hooks';
 
-type TodoListProps = {
-  todos: Todo[],
-  handleDeleteTodo: (id : number) => void,
-  handleToggleTodo: (id : number) => void,
-}
+export default function TodoList() {
 
-export default function TodoList({todos, handleToggleTodo, handleDeleteTodo} : TodoListProps) {
+  // const context = useContext(TodosContext);
+  // if(!context){
+  //   throw new Error("Forgot to add provider");
+  // }
+  const {todos, handleDeleteTodo, handleToggleTodo} = useTodosContext();
 
   return (
     <>
@@ -30,7 +32,7 @@ export default function TodoList({todos, handleToggleTodo, handleDeleteTodo} : T
                   {todo.text}
                 </span>
                 
-                <DeleteButton id={todo.id} handleDeleteTodo={handleDeleteTodo} />
+                <DeleteButton id={todo.id} onDeleteTodo={handleDeleteTodo} />
               </li>
             ))
           }

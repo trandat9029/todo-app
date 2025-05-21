@@ -1,15 +1,15 @@
 import React from 'react'
 
 type DeleteButtonProps = {
-  handleDeleteTodo: (id : number) => void,
+  onDeleteTodo: (id : number) => void,
   id: number,
 }
 
-export default function DeleteButton({ handleDeleteTodo, id } : DeleteButtonProps) {
+export default function DeleteButton({ onDeleteTodo, id } : DeleteButtonProps) {
   return (
     <button onClick={(e) => {
       e.stopPropagation();
-      handleDeleteTodo(id);
+      onDeleteTodo(id);
     }}>
       ❌
     </button>

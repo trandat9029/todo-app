@@ -1,11 +1,13 @@
-import React from 'react'
 
-type CounterProps = {
-  totalNumberOfTodos: number,
-  numberOfCompletedTodos: number,
-}
+import { useTodosContext } from '../../lib/hooks';
 
-export default function Counter({totalNumberOfTodos, numberOfCompletedTodos} : CounterProps) {
+export default function Counter() {
+
+  const {
+    totalNumberOfTodos,
+    numberOfCompletedTodos,
+
+  } = useTodosContext();
   return (
     <>
         <p>
