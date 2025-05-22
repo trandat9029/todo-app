@@ -1,5 +1,6 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { Todo } from "../lib/types";
+import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 
 type TodosContextProviderProps ={
     children: React.ReactNode,
@@ -16,11 +17,19 @@ type TTodosContext = {
 
 export const TodosContext = createContext<TTodosContext | null>(null);
 
+const getInitialTodos = () =>{
+  const saveTodos = localStorage.getItem("todos");
+     if(saveTodos){
+      return JSON.parse(saveTodos); 
+     }else{
+      return [];
+     }
+}
 
 export default function TodosContextProvider({children} : TodosContextProviderProps) {
-
-  //state
-  const [todos, setTodos] = useState<Todo[]>([]);
+  const {isAuthenticated} = useKindeAuth();
+  //state 
+  const [todos, setTodos] = useState<Todo[]>(getInitialTodos);
  
   //derived state 
   const totalNumberOfTodos = todos.length;
@@ -28,7 +37,7 @@ export default function TodosContextProvider({children} : TodosContextProviderPr
 
   // event handle / actions
   const handleAddTodo = (todoText: string) => {
-    if(todos.length >= 3){
+    if(todos.length >= 3 && !isAuthenticated){
       alert('Log in to add move than 3 todos');
       return;
     }else{
@@ -57,6 +66,20 @@ export default function TodosContextProvider({children} : TodosContextProviderPr
   const handleDeleteTodo = (id: number) =>{
     setTodos(prev => prev.filter(todo => todo.id !== id));
   }
+
+  // //side effects
+  // useEffect(() => {
+  //   const saveTodos = localStorage.getItem("todos");
+  //   if(saveTodos){
+  //     setTodos(JSON.parse(saveTodos)); 
+  //   }
+  // }, [])
+
+
+  //add todos to local storage
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos))
+  }, [todos])
 
     return (
         <>
